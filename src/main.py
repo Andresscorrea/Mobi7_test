@@ -25,4 +25,5 @@ df_final = result_sql.groupby(['vehicle_id', 'plate','journey_size'], sort=False
 df_final_ = df_final.merge(df_count, on =['vehicle_id', 'plate','journey_size'], how= 'inner' )
 df_final_['day'] = datetime.today()
 insert_values_db(df_final_)
-df_final_.to_csv(f'resultados.csv',index=False, header=True)
+df_final_csv = df_final.groupby(['vehicle_id', 'plate'], sort=False).sum()
+df_final_csv.to_csv(f'resultados.csv',index=False, header=True)
